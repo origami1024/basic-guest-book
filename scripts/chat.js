@@ -1,66 +1,79 @@
 (function(){
-	function printMsgs(x) {
-		let tmp = document.createElement("p");
-		let node = document.createTextNode(x['msg']);
-		tmp.appendChild(node);
-		chatPanel.appendChild(tmp);
-	}
-	//msgs.forEach(printMsgs);
+	/*$('#myModal').on('shown.bs.modal', function () {
+  	$('#msgInp').trigger('focus')
+	})*/
+
 	let cIndex = 0;
 	function send(e){
-			let tmp = msgInp.value;
-			$.ajax({
+		e.preventDefault();
+		let txt = msgInp.value;
+		let nam = nameInp.value;
+		let mai = mailInp.value;
+		if (mai == "") {mai = "no mail";}
+		$.ajax({
 			type: 'GET',
 		  url: 'msgAdd.php',
-		  contentType: 'application/json',
-		  data : { 'name' : 'noname', 'text' : tmp , 'mail': 'NOMAIL' },
+		  //contentType: 'application/json',
+		  data : { 'name' : nam, 'text' : txt , 'mail': mai },
 		  //data : 'alfred',
 		  success: function(data) {
-		    $('.result').html(data);
+		  	//console.log('wots this');
+		    //$('.result').html(data);
 		  }
 		});
 		msgInp.value = '';
+
+		let $elem = $('#loader');
+		$elem.show();
+		$({deg: 0}).animate({deg: 180}, {
+        duration: 500,
+        step: function(now) {
+            // in the step-callback (that is fired each step of the animation),
+            // you can use the `now` paramter which contains the current
+            // animation-position (`0` up to `angle`)
+            $elem.css({
+                transform: 'rotate(' + now + 'deg)'
+            });
+        }
+    });
+		setTimeout(function(){
+			$('#myModal').modal('hide');
+			$('#loader').hide();
+		}, 300);
 	}
-	subm.addEventListener("click", send);
-	msgInp.addEventListener("keydown", function(e){
+	theForm.addEventListener("submit", send);
+	/*msgInp.addEventListener("keydown", function(e){
 	   	if(e.keyCode == 13) send()
-	});
+	});*/
 
-	$.ajax({
-		type: 'GET',
-	  url: 'msgFresh.php',
-	  contentType: 'application/json',
-	  data : { 'cIndex' : cIndex},
-	  //data : 'alfred',
-	  success: function(data) {
-	  	//console.log('atsucc raw: ' + data);
-	  	parsedData = JSON.parse(data);
-	  	$('#chatPanel').append(parsedData['lines']);
-	  	cIndex = parsedData['cIndex'];
-	  	//console.log('at success:' + cIndex + ':' + parsedData['cIndex']);
-	    //$('.result').html(data);
-	  }
-	});
-
-	setInterval(function() {
+		function upd() {
 		$.ajax({
 			type: 'GET',
 		  url: 'msgFresh.php',
 		  contentType: 'application/json',
 		  data : { 'cIndex' : cIndex},
-		  //data : 'alfred',
 		  success: function(data) {
 		  	//console.log('atsucc raw: ' + data);
+		  	let doScroll = false;
+		  	let objDiv = document.getElementById("chatPanel");
+		  	if (objDiv.scrollTop == (objDiv.scrollHeight - objDiv.clientHeight)) {
+		  		doScroll = true;
+		  	};
+		  	data = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
 		  	parsedData = JSON.parse(data);
 		  	if (parsedData['lines']!='') {
 		  		$('#chatPanel').append(parsedData['lines']);
-		  		let objDiv = document.getElementById("chatPanel");
-					objDiv.scrollTop = objDiv.scrollHeight;
+		  		if (doScroll) {
+						objDiv.scrollTop = objDiv.scrollHeight;
+					};
 				}
 				cIndex = parsedData['cIndex'];
-		  	//console.log('at success:' + cIndex + ':' + parsedData['cIndex']);
-		    //$('.result').html(data);
 		  }
 		});
+	};
+
+	upd();
+	setInterval(function() {
+		upd();
   }, 1000); 
 })()

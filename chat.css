@@ -1,5 +1,37 @@
 body{
 	font-family: Helvetica, sans-serif;
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 0.9;
+}
+.text-primary{
+	font-size: 14px;
+	letter-spacing: -1px;
+}
+#msgInp{
+	resize: none;
+}
+#loader{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	border: 4px dotted black;
+	display:none;
+	position: absolute;
+	left: 50%;
+}
+.lightSpeedIn{
+	animation-duration: 0.2s;
+}
+#chatPanel{
+	height: 75vh;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+@media only screen and (max-width: 500px) {
+	h3{
+		font-size: 20px;
+	}
+	#chatPanel{
+		height: 70vh;
+	}
 }

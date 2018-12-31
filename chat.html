@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>chat</title>
+	<title>basic guest book</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<script
@@ -10,20 +10,61 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>	
+	<link rel="stylesheet" href="animateLib.css">
 	<link rel="stylesheet" href="chat.css">
 </head>
 <body>
-		<div class="container border mb-3 rounded p-3" id="chatPanel" style="height: 75vh; overflow-y: scroll;">
+		<div class="container pt-1 pt-sm-3">
+			<h3 class="font-weight-bold mb-0">Guest comments</h3>
+		</div>
+		<div class="container border mb-3 rounded p-3" id="chatPanel">
 		<!-- style="height: 75vh; overflow-y: scroll;" -->
 		</div>
-	<div class="container px-0">
+
+
+
+		<div class="container py-3 rounded modal fade" role="dialog" tabindex="-1" id="myModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content p-3">
+				<div class="modal-header">
+	        <h5 class="modal-title">Write a comment</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+      	</div>
+				<form id="theForm">
+					<div class="form-group pt-3">
+						<label for="msgInp" class="mb-0 pl-2">Name</label>
+						<input type="text" class="form-control form-control-sm" id="nameInp" required pattern=".{3,}"   required title="3 characters minimum">
+					</div>
+					<div class="form-group">
+						<label for="msgInp" class="mb-0 pl-2 text-secondary">Email</label>
+						<input type="email" class="form-control form-control-sm" id="mailInp">
+					</div>
+					<div class="form-group mb-0">
+						<label for="msgInp" class="mb-0 pl-2">Comment</label>
+			    	<textarea class="form-control form-control-sm" id="msgInp" rows="3" required minlength="15"></textarea>
+						<div class="input-group mt-3 position-relative">
+							<button type="submit" class="btn btn-primary" id="subm"><i class="fas fa-lg fa-paper-plane"></i> send</button>
+							<div id="loader" ></div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="container text-right">
+		<button type="button" class="btn btn-primary" id="modalToggle" data-toggle="modal" data-target="#myModal">Write a comment</button>
+	</div>
+	<!--<div class="container px-0">
 		<div class="input-group">		  
 			<input type="text" class="form-control" id="msgInp">
 			<div class="input-group-append">
 				<button type="button" class="btn btn-primary" id="subm">send</button>
 			</div>
 		</div>
-	</div>
+	</div>-->
 	<!--<script src="scripts/chatData.json" defer></script>-->
 	<script src="scripts/chat.js" defer></script>
 	<!--<script>
