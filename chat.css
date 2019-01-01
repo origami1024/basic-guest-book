@@ -9,6 +9,7 @@ body{
 }
 #msgInp{
 	resize: none;
+	height: 70px;
 }
 #loader{
 	width: 30px;
@@ -18,6 +19,7 @@ body{
 	display:none;
 	position: absolute;
 	left: 50%;
+	bottom: 50%;
 }
 .lightSpeedIn{
 	animation-duration: 0.2s;
@@ -27,11 +29,31 @@ body{
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
-@media only screen and (max-width: 500px) {
+.form-control-sm::placeholder{
+		color: rgba(0, 0, 0, 0);
+}
+@media only screen and (max-width: 577px) {
 	h3{
 		font-size: 20px;
 	}
 	#chatPanel{
 		height: 70vh;
+	}
+	form label{
+		display: none;
+	}
+	.form-control-sm::placeholder{
+		color: rgba(0, 0, 0, 0.6);
+	}
+	#msgInp{
+	height: 50px;
+	}
+	h5{
+		font-size: 14px;
+		font-weight: 900;
+	}
+	.btn-block{
+		height: 30px;
+		padding: 0;
 	}
 }

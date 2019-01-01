@@ -1,8 +1,7 @@
 (function(){
-	/*$('#myModal').on('shown.bs.modal', function () {
+	$('#myModal').on('shown.bs.modal', function () {
   	$('#msgInp').trigger('focus')
-	})*/
-
+	})
 	let cIndex = 0;
 	function send(e){
 		e.preventDefault();
@@ -15,7 +14,6 @@
 		  url: 'msgAdd.php',
 		  //contentType: 'application/json',
 		  data : { 'name' : nam, 'text' : txt , 'mail': mai },
-		  //data : 'alfred',
 		  success: function(data) {
 		  	//console.log('wots this');
 		    //$('.result').html(data);
@@ -28,12 +26,12 @@
 		$({deg: 0}).animate({deg: 180}, {
         duration: 500,
         step: function(now) {
-            // in the step-callback (that is fired each step of the animation),
-            // you can use the `now` paramter which contains the current
-            // animation-position (`0` up to `angle`)
-            $elem.css({
-                transform: 'rotate(' + now + 'deg)'
-            });
+          // in the step-callback (that is fired each step of the animation),
+          // you can use the `now` paramter which contains the current
+          // animation-position (`0` up to `angle`)
+          $elem.css({
+            transform: 'rotate(' + now + 'deg)'
+          });
         }
     });
 		setTimeout(function(){
@@ -42,11 +40,7 @@
 		}, 300);
 	}
 	theForm.addEventListener("submit", send);
-	/*msgInp.addEventListener("keydown", function(e){
-	   	if(e.keyCode == 13) send()
-	});*/
-
-		function upd() {
+	function upd() {
 		$.ajax({
 			type: 'GET',
 		  url: 'msgFresh.php',
@@ -73,7 +67,17 @@
 	};
 
 	upd();
-	setInterval(function() {
+	function timerGo() {
+		setTimeout(function() {
+			upd();
+			//testing the double request bug
+			//$("#footer").append("timer.call:" + Date.now() + "<br>");
+			timerGo();
+  	}, 1000);
+	};
+	/*setTimeout(function() {
 		upd();
-  }, 1000); 
+		$("#footer").append("timer.call:" + Date.now() + "<br>");
+  }, 1000);*/
+  timerGo();
 })()

@@ -26,27 +26,27 @@
 		<div class="container py-3 rounded modal fade" role="dialog" tabindex="-1" id="myModal">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content p-3">
-				<div class="modal-header">
+				<div class="modal-header position-relative p-0 p-sm-3">
+					<div id="loader"></div>
 	        <h5 class="modal-title">Write a comment</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
       	</div>
 				<form id="theForm">
-					<div class="form-group pt-3">
+					<div class="form-group pt-1 pt-sm-3 pb-0 mb-0">
 						<label for="msgInp" class="mb-0 pl-2">Name</label>
-						<input type="text" class="form-control form-control-sm" id="nameInp" required pattern=".{3,}"   required title="3 characters minimum">
+						<input type="text" class="form-control form-control-sm" id="nameInp" required pattern=".{3,}" placeholder="Your name" required title="3 characters minimum">
 					</div>
-					<div class="form-group">
+					<div class="form-group my-1 my-sm-3">
 						<label for="msgInp" class="mb-0 pl-2 text-secondary">Email</label>
-						<input type="email" class="form-control form-control-sm" id="mailInp">
+						<input type="email" class="form-control form-control-sm" placeholder="Email" id="mailInp">
 					</div>
-					<div class="form-group mb-0">
-						<label for="msgInp" class="mb-0 pl-2">Comment</label>
-			    	<textarea class="form-control form-control-sm" id="msgInp" rows="3" required minlength="15"></textarea>
-						<div class="input-group mt-3 position-relative">
-							<button type="submit" class="btn btn-primary" id="subm"><i class="fas fa-lg fa-paper-plane"></i> send</button>
-							<div id="loader" ></div>
+					<div class="form-group mb-0 d-flex flex-column mt-1 mt-sm-3">
+						<label for="msgInp" class="mb-0 pl-2 order-2 order-sm-1">Comment</label>
+			    	<textarea class="form-control form-control-sm order-3 order-sm-2" id="msgInp" required minlength="15" placeholder="Message"></textarea>
+						<div class="input-group mt-0 mb-1 mb-sm-0 mt-sm-3 col-12 col-sm-4 order-1 order-sm-3 p-0">
+							<button type="submit" class="btn btn-primary btn-block" id="subm"><i class="fas fa-lg fa-paper-plane"></i> send</button>
 						</div>
 					</div>
 				</form>
@@ -57,6 +57,7 @@
 	<div class="container text-right">
 		<button type="button" class="btn btn-primary" id="modalToggle" data-toggle="modal" data-target="#myModal">Write a comment</button>
 	</div>
+	<footer id="footer" class="d-flex flex-column"></footer>
 	<!--<div class="container px-0">
 		<div class="input-group">		  
 			<input type="text" class="form-control" id="msgInp">
