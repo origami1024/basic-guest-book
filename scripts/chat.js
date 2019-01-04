@@ -54,14 +54,18 @@
 		  		doScroll = true;
 		  	};
 		  	data = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
+		  	//data = data.replace(/\'/g, '*');
+		  	//data = data.replace(/\"/g, '*');
 		  	parsedData = JSON.parse(data);
-		  	if (parsedData['lines']!='') {
-		  		$('#chatPanel').append(parsedData['lines']);
-		  		if (doScroll) {
-						objDiv.scrollTop = objDiv.scrollHeight;
-					};
+		  	if (cIndex<parsedData['cIndex']) {
+			  	if (parsedData['lines']!='') {
+			  		$('#chatPanel').append(parsedData['lines']);
+			  		if (doScroll) {
+							objDiv.scrollTop = objDiv.scrollHeight;
+						};
+					}
+					cIndex = parsedData['cIndex'];
 				}
-				cIndex = parsedData['cIndex'];
 		  }
 		});
 	};
