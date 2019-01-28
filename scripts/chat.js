@@ -1,4 +1,35 @@
 (function(){
+    function like(e){
+        let tmp
+        let id
+        if (event.target.nodeName == 'BUTTON'){
+	        id = event.target.id.substring(7,event.target.id.length);
+	        tmp = $(event.target).find('.badge').text();
+	        $(event.target).find('.badge').text(parseInt(tmp) + 1);
+        }
+        else {
+            id = event.target.parentElement.id.substring(7,event.target.parentElement.id.length);
+            tmp = $(event.target.parentElement).find('.badge').text();
+            $(event.target.parentElement).find('.badge').text(parseInt(tmp) + 1);
+        }
+	    $.ajax({
+			type: 'GET',
+		  url: 'like.php',
+		  //contentType: 'application/json',
+		  data : { 'id' : id },
+		  success: function(data) {
+		      //console.log('liked! -ajax success callback');
+		  	//console.log('wots this');
+		    //$('.result').html(data);
+		  }
+		});
+	}
+	
+	$(document).on("click touch", '.likeBtn', function(e) {
+	    like(e)
+	});
+    //TODO: like button doesnt work on mobile browsers :(
+
 	$('#myModal').on('shown.bs.modal', function () {
   	$('#msgInp').trigger('focus')
 	})
@@ -40,6 +71,9 @@
 		}, 300);
 	}
 	theForm.addEventListener("submit", send);
+	
+	
+	
 	function upd() {
 		$.ajax({
 			type: 'GET',
