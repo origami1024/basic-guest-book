@@ -2,15 +2,16 @@
     function like(e){
         let tmp
         let id
-        if (event.target.nodeName == 'BUTTON'){
-	        id = event.target.id.substring(7,event.target.id.length);
-	        tmp = $(event.target).find('.badge').text();
-	        $(event.target).find('.badge').text(parseInt(tmp) + 1);
+        
+        if (e.target.nodeName == 'BUTTON'){
+	        id = e.target.id.substring(7,e.target.id.length);
+	        tmp = $(e.target).find('.badge').text();
+	        $(e.target).find('.badge').text(parseInt(tmp) + 1);
         }
         else {
-            id = event.target.parentElement.id.substring(7,event.target.parentElement.id.length);
-            tmp = $(event.target.parentElement).find('.badge').text();
-            $(event.target.parentElement).find('.badge').text(parseInt(tmp) + 1);
+            id = e.target.parentElement.id.substring(7,e.target.parentElement.id.length);
+            tmp = $(e.target.parentElement).find('.badge').text();
+            $(e.target.parentElement).find('.badge').text(parseInt(tmp) + 1);
         }
 	    $.ajax({
 			type: 'GET',
@@ -27,8 +28,7 @@
 	
 	$(document).on("click touch", '.likeBtn', function(e) {
 	    like(e)
-	});
-    //TODO: like button doesnt work on mobile browsers :(
+    });
 
 	$('#myModal').on('shown.bs.modal', function () {
   	$('#msgInp').trigger('focus')
