@@ -78,7 +78,7 @@
 		$.ajax({
 			type: 'GET',
 		  url: 'msgFresh.php',
-		  contentType: 'application/json',
+		  //contentType: 'application/json',
 		  data : { 'cIndex' : cIndex},
 		  success: function(data) {
 		  	//console.log('atsucc raw: ' + data);
@@ -86,23 +86,26 @@
 		  	let objDiv = document.getElementById("chatPanel");
 		  	if (objDiv.scrollTop == (objDiv.scrollHeight - objDiv.clientHeight)) {
 		  		doScroll = true;
-		  	};
+		  	}
 		  	data = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
 		  	//data = data.replace(/\'/g, '*');
 		  	//data = data.replace(/\"/g, '*');
 		  	parsedData = JSON.parse(data);
 		  	if (cIndex<parsedData['cIndex']) {
-			  	if (parsedData['lines']!='') {
+			  	if (parsedData['lines'] !== '') {
 			  		$('#chatPanel').append(parsedData['lines']);
 			  		if (doScroll) {
 							objDiv.scrollTop = objDiv.scrollHeight;
-						};
+						}
 					}
 					cIndex = parsedData['cIndex'];
 				}
-		  }
+		    }, 
+		    error: function(msg){
+                console.log("failed");
+            }
 		});
-	};
+	}
 
 	upd();
 	function timerGo() {
