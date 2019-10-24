@@ -77,7 +77,7 @@
 	
 	function upd() {
 		$.ajax({
-			type: 'POST',
+			type: 'GET',
 		  url: 'msgFresh.php',
 		  //contentType: 'application/json',
 		  data : { 'cIndex' : cIndex},
