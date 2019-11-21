@@ -6,6 +6,8 @@
 
 	
 	$_GET['text'] = str_replace(array("'", '"', "<", ">"), "^", $_GET['text']);
+	$_GET['name'] = str_replace(array("'", '"', "<", ">"), "^", $_GET['name']);
+	$_GET['mail'] = str_replace(array("'", '"', "<", ">"), "^", $_GET['mail']);
 	$sql="insert into log (name, text, mail) values ('" . $_GET['name'] . "', '" . $_GET['text'] . "', '" . $_GET['mail'] . "');";
 	mysqli_query($con, $sql);
 	mysqli_close($con);
